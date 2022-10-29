@@ -61,7 +61,7 @@ with ({copy}) (async function() {
     }
 
     // Loading 1st level comments
-    let loadingCommentsBuffer = 30; // increase buffer if loading comments takes long and the loop break too soon
+    let loadingCommentsBuffer = 100; // increase buffer if loading comments takes long and the loop break too soon
     let numOfCommentsBeforeScroll = getAllComments().length;
     let allComments;
     let lastComment;
@@ -77,13 +77,18 @@ with ({copy}) (async function() {
 
         // If number of comments doesn't change after 15 iterations, break the loop.
         if (numOfCommentsAfterScroll !== numOfCommentsBeforeScroll) {
-            loadingCommentsBuffer = 15;
+            loadingCommentsBuffer = 100;
         } else {
             loadingCommentsBuffer--;
         }
 
         numOfCommentsBeforeScroll = numOfCommentsAfterScroll;
         console.log('Loading 1st level comment number ' + numOfCommentsAfterScroll);
+
+        if (numOfCommentsAfterScroll >= 500) {
+            console.log('Breaking at ' + numOfCommentsAfterScroll)
+            break;
+        }
 
         // Wait 0.3 seconds.
         await new Promise(r => setTimeout(r, 300));
