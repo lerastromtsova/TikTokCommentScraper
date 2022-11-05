@@ -97,7 +97,7 @@ with ({copy}) (async function() {
 
 
     // Loading 2nd level comments
-    loadingCommentsBuffer = 5; // increase buffer if loading comments takes long and the loop break too soon
+    loadingCommentsBuffer = 100; // increase buffer if loading comments takes long and the loop break too soon
     let readMoreDivs;
     while (loadingCommentsBuffer > 0) {
         readMoreDivs = getElementsByXPath(readMoreDivXPath);
@@ -109,7 +109,7 @@ with ({copy}) (async function() {
         if (readMoreDivs.length === 0) {
             loadingCommentsBuffer--;
         } else {
-            loadingCommentsBuffer = 5;
+            loadingCommentsBuffer = 100;
         }
         console.log('Buffer ' + loadingCommentsBuffer);
     }
